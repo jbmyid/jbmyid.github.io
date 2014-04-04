@@ -6,15 +6,15 @@ pygments:	true
 permalink:	/blog/:title
 
 # Setup
-title:		Thinny
+title:		jbmyid
 tagline:	'blog'
 description:	'My personal blog.'
-url:		http://camporez.com
+url:		http://jbmyid.in
 commentsystem:	google
-disqus:		example
+# disqus:		example
 
 author:
-  name:		'Ian Camporez Brunelli'
+  name:		'Jalendra Bhanarkar'
   url:		https://google.com/+IanCamporezBrunelli
 
 paginate:	5
@@ -25,28 +25,28 @@ cover:		/assets/images/cover.jpg
 
 social:
   - icon:	twitter
-    url:	https://twitter.com/iancamporez
+    url:	https://twitter.com/jbmyid
     desc:	Follow me on twitter
 
   - icon:	github
-    url:	https://github.com/camporez
+    url:	https://github.com/jbmyid
     desc:	Fork me on github
 
   - icon:	googleplus-alt
-    url:	https://google.com/+IanCamporezBrunelli
+    url:	https://google.com/+jbmyid
     desc:	Add me on google+
 
   - icon:	feed
     url:	http://camporez.com/atom.xml
     desc:	Subscribe to my feed
-    
+
 menu:
   - title:	Home
     url:	/
-    
+
   - title:	About
     url:	/about
-    
+
 copyright:
   author:	Camporez
   url:		http://camporez.com

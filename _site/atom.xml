@@ -4,13 +4,131 @@
  <title>jbmyid</title>
  <link href="http://www.jbmyid.in/atom.xml" rel="self"/>
  <link href="http://www.jbmyid.in/"/>
- <updated>2014-04-04T18:53:53+05:30</updated>
+ <updated>2014-04-04T19:31:14+05:30</updated>
  <id>http://www.jbmyid.in</id>
  <author>
    <name>Jalendra Bhanarkar</name>
    <email></email>
  </author>
 
+ 
+ <entry>
+   <title>Quick Rails Deployment with Capistrano</title>
+   <link href="http://www.jbmyid.in/blog/rails-4-capistrano"/>
+   <updated>2014-04-04T00:00:00+05:30</updated>
+   <id>http://www.jbmyid.in/blog/rails-4-capistrano</id>
+   <content type="html">&lt;h1 id=&quot;deploying-rails-4-app-with-capistrano&quot;&gt;Deploying Rails 4 App with Capistrano&lt;/h1&gt;
+
+&lt;p&gt;Assuming we have a rails app as my_blog
+add following in your Gemfile&lt;/p&gt;
+
+&lt;pre&gt;
+group :development do
+  gem &#39;capistrano&#39;
+end
+&lt;/pre&gt;
+&lt;p&gt;now bundle install&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;$ bundle install&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;Capify: make sure there’s no “Capfile” or “capfile” present&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;$ cap install&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;This creates the following files:&lt;/p&gt;
+&lt;pre&gt;
+├── Capfile
+├── config
+│   ├── deploy
+│   │   ├── production.rb
+│   │   └── staging.rb
+│   └── deploy.rb
+└── lib
+    └── capistrano
+            └── tasks
+&lt;/pre&gt;
+&lt;p&gt;Open deploy.rb and set&lt;/p&gt;
+&lt;pre&gt;
+&lt;code class=&quot;ruby&quot;&gt;
+set :application, &#39;application-name&#39;
+set :repo_url, &#39;git@github.com:abc/xyz.git&#39; # your git repo
+set :deploy_to, &#39;/var/www/my_blog&#39; # where you have to keep your application on server
+
+set :linked_files, %w{config/database.yml config/any_config.yml tmp/restart.txt}
+set :linked_dirs, %w{log tmp/pids tmp/cache tmp/sockets vendor/bundle public/system}
+
+set :default_env, { path: &quot;/usr/local/bin:$PATH&quot; }
+
+namespace :deploy do
+
+  desc &#39;Restart application&#39;
+  task :restart do
+    on roles(:app), in: :sequence, wait: 5 do
+      # Your restart mechanism here, for example:
+      execute :touch, release_path.join(&#39;tmp/restart.txt&#39;)
+    end
+  end
+
+  after :publishing, :restart
+
+  after :restart, :clear_cache do
+    on roles(:web), in: :groups, limit: 3, wait: 10 do
+      # Here we can do anything such as:
+      # within release_path do
+      #   execute :rake, &#39;cache:clear&#39;
+      # end
+    end
+  end
+
+end
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Now setup stage for deploy
+eg. staging.rb #in config/deploy/staging.rb&lt;/p&gt;
+&lt;pre&gt;
+&lt;code class=&quot;ruby&quot;&gt;
+role :app, %w{deploy@ip-addressORserver-address}
+role :web, %w{deploy@ip-addressORserver-address}
+
+server &#39;ip-addressORserver-address&#39;, user: &#39;deploy&#39;, roles: %w{web app}
+
+set :branch, &#39;staging&#39; # staging branch of git repo(You can set whatever you want)
+
+# in my case i had to set port no for ssh you can omit if you are using default ssh port no.
+set :ssh_options, {
+    port: 900
+ }
+&lt;/code&gt;
+&lt;/pre&gt;
+
+&lt;p&gt;Now you can deploy your app with.&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;$ cap staging deploy&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;Wait.. its not yet done you will have to add som task for each deployment you have to do like migration, asset precompile etc.&lt;/p&gt;
+
+&lt;p&gt;For that we have capistrano-rails
+add &lt;code&gt;gem &#39;capistrano-rails&#39;&lt;/code&gt; inside development group of Gemfile
+like:&lt;/p&gt;
+&lt;pre&gt;
+&lt;code class=&quot;ruby&quot;&gt;
+group :development do
+  gem &#39;capistrano&#39;
+  gem &#39;capistrano-rails
+end
+&lt;/code&gt;
+&lt;/pre&gt;
+
+&lt;p&gt;add following line in &lt;code&gt;Capfile&lt;/code&gt;&lt;/p&gt;
+&lt;pre&gt;
+require &#39;capistrano/rails&#39;
+&lt;/pre&gt;
+&lt;p&gt;It will run basic task required while rails application deployment like &lt;code&gt;rake db:migrate&lt;/code&gt; and &lt;code&gt;rake assets:precompile&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Yeh you are done with basic setup of deplyment.&lt;/strong&gt;&lt;/p&gt;
+
+</content>
+ </entry>
  
  <entry>
    <title>Generate PDF(e-ticket) from html in Rails</title>

@@ -79,7 +79,7 @@ Yehhhhhh……………..its ready to download and attach.
 
 Now I am writing brief for downloading and attaching the pdf to mail.
 
-###How to download eticket pdf.
+### How to download eticket pdf.
 In your orders controller you can create an separate action for downloading or you can do this in your orders show action in pdf response. Any way I am creating separate action for downloading order’s e-ticket pdf.
 <pre>
   <code class="ruby">
@@ -93,6 +93,7 @@ In your orders controller you can create an separate action for downloading or y
     end
   </code>
 </pre>
+
 ###Sending e-ticket as attachment in mail
 <pre>
   <code class="ruby">

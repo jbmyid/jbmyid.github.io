@@ -4,7 +4,7 @@
  <title>jbmyid</title>
  <link href="http://www.jbmyid.in/atom.xml" rel="self"/>
  <link href="http://www.jbmyid.in/"/>
- <updated>2014-04-04T18:43:54+05:30</updated>
+ <updated>2014-04-04T18:53:53+05:30</updated>
  <id>http://www.jbmyid.in</id>
  <author>
    <name>Jalendra Bhanarkar</name>
@@ -111,7 +111,8 @@ Now you have your e-ticket ready to download and attach to any mail. You have to
     end
   &lt;/code&gt;
 &lt;/pre&gt;
-&lt;p&gt;###Sending e-ticket as attachment in mail&lt;/p&gt;
+
+&lt;h3 id=&quot;sending-e-ticket-as-attachment-in-mail&quot;&gt;Sending e-ticket as attachment in mail&lt;/h3&gt;
 &lt;pre&gt;
   &lt;code class=&quot;ruby&quot;&gt;
     class OrderMailer &amp;lt; ActionMailer::Base

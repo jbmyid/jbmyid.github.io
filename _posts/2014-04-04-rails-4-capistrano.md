@@ -1,13 +1,13 @@
 ---
 layout: post
 title: "Quick Rails Deployment with Capistrano"
-quote: "Deployment of Rails 4 app with Capistrano"
+quote: "Deployment of Rails 4 app with Capistrano 3"
 image: false
 video: false
 comments: true
 ---
 
-#Deploying Rails 4 App with Capistrano
+#Deploying Rails 4 App with Capistrano 3
 
 Assuming we have a rails app as my_blog
 add following in your Gemfile
@@ -95,7 +95,7 @@ Now you can deploy your app with.
 
 `$ cap staging deploy`
 
-Wait.. its not yet done you will have to add som task for each deployment you have to do like migration, asset precompile etc.
+Wait.. its not done yet you will have to add some task for each deployment you have to do like migration, asset precompile etc.
 
 For that we have capistrano-rails
 add `gem 'capistrano-rails'` inside development group of Gemfile

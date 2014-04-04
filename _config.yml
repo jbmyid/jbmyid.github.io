@@ -9,7 +9,7 @@ permalink:	/blog/:title
 title:		jbmyid
 tagline:	'blog'
 description:	'My personal blog.'
-url:		http://jbmyid.in
+url:		http://www.jbmyid.in
 commentsystem:	google
 # disqus:		example
 
@@ -37,7 +37,7 @@ social:
     desc:	Add me on google+
 
   - icon:	feed
-    url:	http://camporez.com/atom.xml
+    url:	http://www.jbmyid.com/atom.xml
     desc:	Subscribe to my feed
 
 menu:

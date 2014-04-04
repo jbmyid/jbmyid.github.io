@@ -2,7 +2,7 @@
 layout: post
 title: "Generate PDF(e-ticket) from html in Rails"
 quote: "In most of the projects we get requirements in which we need to send an attachment or download PDFs for order’s e-ticket or any certificate kind of things. So here I have written a post  for how to create PDFs from html using “pdfkit” gem."
-image: false
+image: /media/2014-02-27-hello-cosette/cover.jpg
 video: false
 comments: true
 ---

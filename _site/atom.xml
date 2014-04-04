@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
  <title>jbmyid</title>
- <link href="http://jbmyid.in/atom.xml" rel="self"/>
- <link href="http://jbmyid.in/"/>
- <updated>2014-04-04T18:13:18+05:30</updated>
- <id>http://jbmyid.in</id>
+ <link href="http://www.jbmyid.in/atom.xml" rel="self"/>
+ <link href="http://www.jbmyid.in/"/>
+ <updated>2014-04-04T18:34:06+05:30</updated>
+ <id>http://www.jbmyid.in</id>
  <author>
    <name>Jalendra Bhanarkar</name>
    <email></email>
@@ -14,9 +14,9 @@
  
  <entry>
    <title>Generate PDF(e-ticket) from html in Rails</title>
-   <link href="http://jbmyid.in/blog/html-to-pdf"/>
+   <link href="http://www.jbmyid.in/blog/html-to-pdf"/>
    <updated>2014-04-04T00:00:00+05:30</updated>
-   <id>http://jbmyid.in/blog/html-to-pdf</id>
+   <id>http://www.jbmyid.in/blog/html-to-pdf</id>
    <content type="html">&lt;h1 id=&quot;pdfe-ticket-from-html-in-rails&quot;&gt;PDF(e-ticket) from html in Rails&lt;/h1&gt;
 
 &lt;p&gt;Following are the steps for creating pdf from html views.&lt;/p&gt;
@@ -135,95 +135,6 @@ Now you have your e-ticket ready to download and attach to any mail. You have to
 &lt;p&gt;yippeeeeee…..Mail sent with attached e-ticket pdf.&lt;/p&gt;
 
 &lt;h1 id=&quot;thank-you&quot;&gt;THANK YOU&lt;/h1&gt;
-</content>
- </entry>
- 
- <entry>
-   <title>Hello, Cosette</title>
-   <link href="http://jbmyid.in/blog/hello-cosette"/>
-   <updated>2014-02-27T00:00:00+05:30</updated>
-   <id>http://jbmyid.in/blog/hello-cosette</id>
-   <content type="html">#Thinny 2.1, codename &quot;[Cosette](http://lesmiserables.wikia.com/wiki/Cosette)&quot;
-
-Cosette is the main character of the french novel _Les Misérables_, published in 1862 by _Victor Hugo_.
-
-&lt;div id=&quot;article-img&quot;&gt;&lt;a href=&quot;/media/2014-02-27-hello-cosette/cosette.jpg&quot; target=&quot;_blank&quot;&gt;&lt;img src=&quot;/media/2014-02-27-hello-cosette/cosette.jpg&quot; alt=&quot;Amanda Seyfried as Cosette on the 2012 movie.&quot; width=&quot;100%&quot; /&gt;&lt;/a&gt;
-&lt;blockquote style=&quot;border-left: 10px solid #D5D5D5;&quot;&gt;Amanda Seyfried as Cosette on the 2012 movie.&lt;/blockquote&gt;&lt;/div&gt;
-
-
-This new version of Thinny comes with mobile support and some bugfixes.
-
-## Usage
-
-### Main variables
-
-The global variables are set on the `_config.yml`[^1] file.
-
-To start, you need to change at least the variable `url` on the file.
-
-#### Social links
-
-To add a social link you just need to add the following code inside the variable `social`:
-
-~~~
-  - icon:	[the genericon name for the social network]
-    url:	[the url to follow]
-    desc:	[a small description for the link (e.g. &quot;Follow me on twitter&quot;)]
-~~~
-
-#### Menu
-
-To add a menu item you just need to add the following code inside the variable `menu`:
-
-~~~
-  - title:	[title of the menu item]
-    url:	[the url to follow]
-~~~
-
-#### Others
-
-You&#39;ll find a lot of other variables inside the file, e.g.:
-
-- the site `title`, `description`, `icon` and default `cover` image.
-- text of the `copyright` message.
-- the number of posts per page (`paginate`).
-- the `permalink`&#39;s structure (see [the docs](http://jekyllrb.com/docs/pagination/)).
-
-
-### Default YAML tags
-
-- `layout:`&lt;i&gt;`post, page`&lt;/i&gt; `or `&lt;i&gt;`fullscreen`&lt;/i&gt;: defines the layout of the page.
-- `title: [string]`: title of the post.
-- `quote: [string]`: a small description of the post to be shown above the title.
-- `dark:`&lt;i&gt;`true`&lt;/i&gt; `or `&lt;i&gt;`false`&lt;/i&gt;: use black font (instead of white) for the header (default value is false).
-- `image: [url] or `&lt;i&gt;`false`&lt;/i&gt;: a cover image for the post (default value is _false_).
-- `video:`&lt;i&gt;`true`&lt;/i&gt; `or `&lt;i&gt;`false`&lt;/i&gt;: add a cover video for the post (default value is _false_).
-- `video_mp4: [url]`: the URL for the mp4 video.
-- `video_webm: [url]`: the URL for the webm video.
-- `video_ogv: [url]`: the URL for the ogv video.
-
-## Versions
-
-Here is a table with all Thinny&#39;s versions:
-
-|----
-| Version | Codename | Platform | Release date
-|:-:|:-:|:-:|:-:
-| [0.3](https://github.com/camporez/Thinny/releases/tag/v0.3-alexandra) | [Alexandra](http://nikita2010.wikia.com/wiki/Alexandra_Udinov) | Ghost 0.3.x |November 2013
-| [2.0](https://github.com/camporez/Thinny/releases/tag/v2.0-bianca) | [Bianca](http://memoriaglobo.globo.com/programas/entretenimento/novelas/caras-bocas/caras-bocas-bianca-isabelle-drummond.htm) | Jekyll | January 2014 |
-| [2.1](https://github.com/camporez/Thinny/releases/tag/v2.1-cosette) | [Cosette](http://lesmiserables.wikia.com/wiki/Cosette) | Jekyll | February 2014
-| 2.2 | [Dolores](http://en.wikipedia.org/wiki/Dolores_Haze) | Jekyll | _Soon..._[^2]
-|----
-
-## Download
-
-&gt; Thinny 2.1 is already [available for download on GitHub](https://github.com/camporez/Thinny/releases).
-
------
-Want to see something else added or report a bug? [Open an issue](https://github.com/camporez/camporez.github.io/issues/new).
-
-[^1]: This file is placed in your root directory. It&#39;s the main file of configuration. For more information, read [the docs](http://jekyllrb.com/docs/configuration/).
-[^2]: See the [issues list](https://github.com/camporez/camporez.github.io/issues?milestone=3).
 </content>
  </entry>
  

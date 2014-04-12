@@ -4,6 +4,11 @@ article: true
 ---
 
 <header class="{% if page.dark %}dark{% else %}clean{% endif %}" style="background-image: url({% if page.image %}{{ page.image }}{% else %}{{ site.cover }}{% endif %}); height: 100%;" data-stellar-background-ratio="0.5" data-stellar-horizontal-offset="50">
+	{% if page.logo %}
+	<a href="{{ site.url }}">
+		<div id="home-title" class="site-icon-page" style="background-image: url({{ page.logo }});" data-stellar-ratio="0.7"></div>
+	</a>
+	{% endif %}
 	{% if page.video %}
 		<video id="bg-video" preload="auto" autoplay="true" loop="loop" muted="muted" volume="0" data-stellar-ratio="0.5">
 		{% for format in page.video %}

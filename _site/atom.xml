@@ -4,7 +4,7 @@
  <title>jbmyid</title>
  <link href="http://www.jbmyid.in/atom.xml" rel="self"/>
  <link href="http://www.jbmyid.in/"/>
- <updated>2014-04-04T19:31:14+05:30</updated>
+ <updated>2014-04-12T15:47:01+05:30</updated>
  <id>http://www.jbmyid.in</id>
  <author>
    <name>Jalendra Bhanarkar</name>
@@ -13,11 +13,114 @@
 
  
  <entry>
+   <title>Installing Ubuntu 13.10 in dual boot with windows 8.1</title>
+   <link href="http://www.jbmyid.in/blog/installing-ubuntu-on-efi-enabled-laptop"/>
+   <updated>2014-04-12T00:00:00+05:30</updated>
+   <id>http://www.jbmyid.in/blog/installing-ubuntu-on-efi-enabled-laptop</id>
+   <content type="html">&lt;h1 id=&quot;installing-ubuntu-1310-in-dual-boot-with-windows-81&quot;&gt;Installing Ubuntu 13.10 in dual boot with windows 8.1&lt;/h1&gt;
+
+&lt;p&gt;Recently I bought Lenovo G510 which have efi feature for boot options. I have struglled a lot to install ubuntu and windows both in dual boot.
+After a long strugle I have learned how to install windows 8.1 and ubuntu 13.10 in dual boot.&lt;/p&gt;
+
+&lt;p&gt;Here are steps I followed to work it out.&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;Before installing windows 8.1 make sure you are installing it in EFI mode.
+    &lt;ul&gt;
+      &lt;li&gt;Go to boot menu and disable Legacy mode and enable EFI mode only&lt;/li&gt;
+      &lt;li&gt;Turn of Secure Boot&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;After enabling EFI install windows 8.1&lt;/li&gt;
+  &lt;li&gt;Now create bootable usb of ubuntu 13.10 
+    &lt;ul&gt;
+      &lt;li&gt;You can use linux startup disk creator to create bootable usb.&lt;/li&gt;
+      &lt;li&gt;Or use universal usb installer for windows.&lt;/li&gt;
+    &lt;/ul&gt;
+
+    &lt;div id=&quot;article-img&quot;&gt;&lt;a href=&quot;/media/2014-04-12-installing-ubuntu-on-efi-enabled-laptop/Create-a-USB-stick.png&quot; target=&quot;_blank&quot;&gt;&lt;img src=&quot;/media/2014-04-12-installing-ubuntu-on-efi-enabled-laptop/Create-a-USB-stick.png&quot; alt=&quot;&quot; width=&quot;100%&quot; /&gt;&lt;/a&gt;
+&lt;blockquote style=&quot;border-left: 10px solid #D5D5D5;&quot;&gt;&lt;/blockquote&gt;&lt;/div&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Go to disk manager, and shrink the partition to free up space to install Ubuntu.
+    &lt;ul&gt;
+      &lt;li&gt;Shrink about 10 - 20 Gb whichever suits you.&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;From windows TURN OFF fast startup from Power option.&lt;/p&gt;
+
+    &lt;div id=&quot;article-img&quot;&gt;&lt;a href=&quot;/media/2014-04-12-installing-ubuntu-on-efi-enabled-laptop/power.png&quot; target=&quot;_blank&quot;&gt;&lt;img src=&quot;/media/2014-04-12-installing-ubuntu-on-efi-enabled-laptop/power.png&quot; alt=&quot;&quot; width=&quot;100%&quot; /&gt;&lt;/a&gt;
+&lt;blockquote style=&quot;border-left: 10px solid #D5D5D5;&quot;&gt;&lt;/blockquote&gt;&lt;/div&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Now plug ubuntu bootable usb and click on &lt;code&gt;restart&lt;/code&gt; holding &lt;code&gt;SHIFT&lt;/code&gt; button.&lt;/li&gt;
+  &lt;li&gt;Now blue screen will appear, look for &lt;code&gt;Use Device&lt;/code&gt; option and select and press &lt;code&gt;enter&lt;/code&gt;
+    &lt;ul&gt;
+      &lt;li&gt;It will show &lt;code&gt;EFI USB Device&lt;/code&gt;, select and press &lt;code&gt;enter&lt;/code&gt; &lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Now the Ubuntu boot screen will appear.
+    &lt;ul&gt;
+      &lt;li&gt;You can now try Ubuntu without installing or install directly.&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;If you see blank screen after selecting any option follow
+    &lt;ul&gt;
+      &lt;li&gt;Select any of the option from boot screen but dont press enter&lt;/li&gt;
+    &lt;/ul&gt;
+
+    &lt;div id=&quot;article-img&quot;&gt;&lt;a href=&quot;/media/2014-04-12-installing-ubuntu-on-efi-enabled-laptop/boot.png&quot; target=&quot;_blank&quot;&gt;&lt;img src=&quot;/media/2014-04-12-installing-ubuntu-on-efi-enabled-laptop/boot.png&quot; alt=&quot;&quot; width=&quot;100%&quot; /&gt;&lt;/a&gt;
+&lt;blockquote style=&quot;border-left: 10px solid #D5D5D5;&quot;&gt;&lt;/blockquote&gt;&lt;/div&gt;
+
+    &lt;ul&gt;
+      &lt;li&gt;Press &lt;code&gt;e&lt;/code&gt; and add &lt;code&gt;acpi_osi=Linux acpi_backlight=vendor&lt;/code&gt; in boot options before &lt;code&gt;quiet splash&lt;/code&gt;&lt;/li&gt;
+      &lt;li&gt;Press F10 to boot&lt;/li&gt;
+    &lt;/ul&gt;
+    &lt;pre&gt;Note: This step will be required each time you boot.&lt;/pre&gt;
+  &lt;/li&gt;
+  &lt;li&gt;If you see a message “System is running low graphics” kind of thing from where you can not prceed further.
+    &lt;ul&gt;
+      &lt;li&gt;Add &lt;code&gt;nomodeset&lt;/code&gt; in boot options before &lt;code&gt;quiet splash&lt;/code&gt;&lt;/li&gt;
+      &lt;li&gt;And follow 9 th step&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Now moving to installation of ubuntu 
+    &lt;ul&gt;
+      &lt;li&gt;Install from try ubuntu or Install unbuntu option&lt;/li&gt;
+      &lt;li&gt;Select &lt;code&gt;Something Else&lt;/code&gt; option&lt;/li&gt;
+      &lt;li&gt;Now when the partition selection screen appear choose free space which was freed from windows of 10/20 GB&lt;/li&gt;
+      &lt;li&gt;click &lt;code&gt;+&lt;/code&gt; button and type 2 GB(i.e 2048 MB) and select swap area option from drop down and press create button&lt;/li&gt;
+      &lt;li&gt;select free space again and click &lt;code&gt;+&lt;/code&gt; button and select &lt;code&gt;/&lt;/code&gt; (root) from dropdown and press create.&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Continue installation&lt;/li&gt;
+  &lt;li&gt;Now while booting ubuntu if you encounter blank screen with blinking cursor then enable Legacy Support from boot menu (I had to do it. Without enabling Legacy support i was not able to see ubuntu ui). &lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h1 id=&quot;afer-installation&quot;&gt;Afer installation&lt;/h1&gt;
+&lt;p&gt;If you used point 9. or 10. to boot you will need to add it in boot default options. To do so follow these steps.&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Open terminal &lt;/li&gt;
+  &lt;li&gt;Type &lt;code&gt;sudo vi /etc/defaults/grub&lt;/code&gt; and press enter&lt;/li&gt;
+  &lt;li&gt;Add &lt;code&gt;acpi_osi=Linux acpi_backlight=vendor&lt;/code&gt; before &lt;code&gt;quiet splash&lt;/code&gt; in &lt;code&gt;GRUB_CMDLINE_LINUX_DEFAULT&lt;/code&gt; option and save the file&lt;/li&gt;
+  &lt;li&gt;Type &lt;code&gt;sudo update-grub&lt;/code&gt; in terminal and press enter&lt;/li&gt;
+  &lt;li&gt;Now try rebooting you wont need adding these options further while booting.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;pre&gt;Yes we are done&lt;/pre&gt;
+
+&lt;div id=&quot;article-img&quot;&gt;&lt;a href=&quot;/media/2014-04-12-installing-ubuntu-on-efi-enabled-laptop/yes.jpeg&quot; target=&quot;_blank&quot;&gt;&lt;img src=&quot;/media/2014-04-12-installing-ubuntu-on-efi-enabled-laptop/yes.jpeg&quot; alt=&quot;&quot; width=&quot;100%&quot; /&gt;&lt;/a&gt;
+&lt;blockquote style=&quot;border-left: 10px solid #D5D5D5;&quot;&gt;&lt;/blockquote&gt;&lt;/div&gt;
+
+</content>
+ </entry>
+ 
+ <entry>
    <title>Quick Rails Deployment with Capistrano</title>
    <link href="http://www.jbmyid.in/blog/rails-4-capistrano"/>
    <updated>2014-04-04T00:00:00+05:30</updated>
    <id>http://www.jbmyid.in/blog/rails-4-capistrano</id>
-   <content type="html">&lt;h1 id=&quot;deploying-rails-4-app-with-capistrano&quot;&gt;Deploying Rails 4 App with Capistrano&lt;/h1&gt;
+   <content type="html">&lt;h1 id=&quot;deploying-rails-4-app-with-capistrano-3&quot;&gt;Deploying Rails 4 App with Capistrano 3&lt;/h1&gt;
 
 &lt;p&gt;Assuming we have a rails app as my_blog
 add following in your Gemfile&lt;/p&gt;
@@ -105,7 +208,7 @@ set :ssh_options, {
 
 &lt;p&gt;&lt;code&gt;$ cap staging deploy&lt;/code&gt;&lt;/p&gt;
 
-&lt;p&gt;Wait.. its not yet done you will have to add som task for each deployment you have to do like migration, asset precompile etc.&lt;/p&gt;
+&lt;p&gt;Wait.. its not done yet you will have to add some task for each deployment you have to do like migration, asset precompile etc.&lt;/p&gt;
 
 &lt;p&gt;For that we have capistrano-rails
 add &lt;code&gt;gem &#39;capistrano-rails&#39;&lt;/code&gt; inside development group of Gemfile

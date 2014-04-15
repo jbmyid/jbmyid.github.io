@@ -4,7 +4,7 @@
  <title>jbmyid</title>
  <link href="http://www.jbmyid.in/atom.xml" rel="self"/>
  <link href="http://www.jbmyid.in/"/>
- <updated>2014-04-15T19:00:38+05:30</updated>
+ <updated>2014-04-15T19:28:33+05:30</updated>
  <id>http://www.jbmyid.in</id>
  <author>
    <name>Jalendra Bhanarkar</name>
@@ -18,8 +18,16 @@
    <updated>2014-04-15T00:00:00+05:30</updated>
    <id>http://www.jbmyid.in/blog/bootstrap-on-rails</id>
    <content type="html">&lt;h1 id=&quot;setup-twitter-bootstrap-on-rails&quot;&gt;“Setup Twitter Bootstrap on Rails”&lt;/h1&gt;
+&lt;p&gt;Twitter Bootstrap is the most popular front-end framework for developing responsive, mobile first projects on the web. This is the most basic thing needed in rails app if no UI yet finaled yet or to design your responsive web layout.
+&lt;br /&gt;
+To integrate twitter bootstrap in your rails project you can do any of the following method.&lt;/p&gt;
 
-&lt;h4 id=&quot;here-are-the-steps-which-will-be-needed-to-make-bootstrap-working-on-rails-app&quot;&gt;Here are the steps which will be needed to make bootstrap working on rails app.&lt;/h4&gt;
+&lt;ul&gt;
+  &lt;li&gt;Using gem ‘twitter-bootstrap-rails’ from &lt;a href=&quot;https://github.com/seyhunak/twitter-bootstrap-rails/tree/bootstrap3&quot;&gt;here&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;Or below steps to integrate without gem&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h4 id=&quot;here-are-the-steps-which-will-be-needed-to-integrate-twitter-bootstrap-in-rails-app&quot;&gt;Here are the steps which will be needed to integrate twitter bootstrap in rails app.&lt;/h4&gt;
 
 &lt;ol&gt;
   &lt;li&gt;Download bootstap from &lt;a href=&quot;http://getbootstrap.com/getting-started/#download&quot;&gt;here&lt;/a&gt;&lt;/li&gt;

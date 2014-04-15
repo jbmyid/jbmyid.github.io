@@ -8,8 +8,14 @@ comments: true
 ---
 
 #"Setup Twitter Bootstrap on Rails"
+Twitter Bootstrap is the most popular front-end framework for developing responsive, mobile first projects on the web. This is the most basic thing needed in rails app if no UI yet finaled yet or to design your responsive web layout.
+<br>
+To integrate twitter bootstrap in your rails project you can do any of the following method.
 
-####Here are the steps which will be needed to make bootstrap working on rails app.
+* Using gem 'twitter-bootstrap-rails' from [here](https://github.com/seyhunak/twitter-bootstrap-rails/tree/bootstrap3)
+* Or below steps to integrate without gem
+
+####Here are the steps which will be needed to integrate twitter bootstrap in rails app.
 
 1. Download bootstap from [here](http://getbootstrap.com/getting-started/#download)
 2. Extract the zip file and copy assets folder content to `yourApp/vendor/assets/`

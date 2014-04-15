@@ -4,13 +4,73 @@
  <title>jbmyid</title>
  <link href="http://www.jbmyid.in/atom.xml" rel="self"/>
  <link href="http://www.jbmyid.in/"/>
- <updated>2014-04-12T15:47:01+05:30</updated>
+ <updated>2014-04-15T19:00:38+05:30</updated>
  <id>http://www.jbmyid.in</id>
  <author>
    <name>Jalendra Bhanarkar</name>
    <email></email>
  </author>
 
+ 
+ <entry>
+   <title>Setup Twitter Bootstrap on Rails</title>
+   <link href="http://www.jbmyid.in/blog/bootstrap-on-rails"/>
+   <updated>2014-04-15T00:00:00+05:30</updated>
+   <id>http://www.jbmyid.in/blog/bootstrap-on-rails</id>
+   <content type="html">&lt;h1 id=&quot;setup-twitter-bootstrap-on-rails&quot;&gt;“Setup Twitter Bootstrap on Rails”&lt;/h1&gt;
+
+&lt;h4 id=&quot;here-are-the-steps-which-will-be-needed-to-make-bootstrap-working-on-rails-app&quot;&gt;Here are the steps which will be needed to make bootstrap working on rails app.&lt;/h4&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;Download bootstap from &lt;a href=&quot;http://getbootstrap.com/getting-started/#download&quot;&gt;here&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;Extract the zip file and copy assets folder content to &lt;code&gt;yourApp/vendor/assets/&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;Now you will have following folder in &lt;code&gt;vendor/assets/&lt;/code&gt; directory
+    &lt;ul&gt;
+      &lt;li&gt;fonts&lt;/li&gt;
+      &lt;li&gt;stylesheets&lt;/li&gt;
+      &lt;li&gt;javascripts&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Create &lt;code&gt;bootstrap_overrides.css.scss&lt;/code&gt; in &lt;code&gt;yourApp/app/assets/stylesheets/&lt;/code&gt; directory and add following line at the top.
+    &lt;ul&gt;
+      &lt;li&gt;&lt;code&gt;@import &quot;bootstrap&quot;;&lt;/code&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Rename your &lt;code&gt;application.css&lt;/code&gt; file to &lt;code&gt;application.css.scss&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;Add &lt;code&gt;*= require bootstrap_overrides&lt;/code&gt; to your &lt;code&gt;application.css.scss&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;Add following code to your &lt;code&gt;bootstrap_overrides.css.scss&lt;/code&gt; file
+  *
+    &lt;pre&gt;
+   &lt;code class=&quot;ruby&quot;&gt;
+     @font-face {
+       font-family: &#39;Glyphicons Halflings&#39;;
+       src: url(asset_path(&#39;glyphicons-halflings-regular.eot&#39;));
+       src: url(asset_path(&#39;glyphicons-halflings-regular.eot?#iefix&#39;)) format(&#39;embedded-opentype&#39;), url(asset_path(&#39;glyphicons-halflings-regular.woff&#39;)) format(&#39;woff&#39;), url(asset_path(&#39;glyphicons-halflings-regular.ttf&#39;)) format(&#39;truetype&#39;), url(asset_path(&#39;glyphicons-halflings-regular.svg#glyphicons_halflingsregular&#39;)) format(&#39;svg&#39;);
+     }
+   &lt;/code&gt;
+ &lt;/pre&gt;
+    &lt;div class=&quot;message&quot;&gt;
+   Above code is to fix the glyphicons issue in asset pipelining (in production).
+ &lt;/div&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Add &lt;code&gt;config.assets.paths &amp;lt;&amp;lt; &quot;#{Rails}/vendor/assets/fonts&quot;&lt;/code&gt; in your &lt;code&gt;application.rb&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;Add &lt;code&gt;//= require bootstrap.min&lt;/code&gt; in your application.js if you want to include bootstrap js.&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h4 id=&quot;if-even-after-doing-all-above-steps-the-glyphicons-doesnt-work-then&quot;&gt;If even after doing all above steps the glyphicons doesnt work then&lt;/h4&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;move the fonts to &lt;code&gt;yourApp/app/assets/fonts/&lt;/code&gt;. And change fonts path in &lt;code&gt;application.rb&lt;/code&gt;
+&lt;br /&gt;i.e.  &lt;code&gt;config.assets.paths &amp;lt;&amp;lt; &quot;#{Rails}/assets/fonts&quot;&lt;/code&gt;&lt;/p&gt;
+
+    &lt;div class=&quot;message&quot;&gt;
+You are welcome :P
+&lt;/div&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+</content>
+ </entry>
  
  <entry>
    <title>Installing Ubuntu 13.10 in dual boot with windows 8.1</title>

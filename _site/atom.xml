@@ -4,7 +4,7 @@
  <title>jbmyid</title>
  <link href="http://www.jbmyid.in/atom.xml" rel="self"/>
  <link href="http://www.jbmyid.in/"/>
- <updated>2014-04-15T19:28:33+05:30</updated>
+ <updated>2014-04-20T06:16:15-07:00</updated>
  <id>http://www.jbmyid.in</id>
  <author>
    <name>Jalendra Bhanarkar</name>
@@ -15,7 +15,7 @@
  <entry>
    <title>Setup Twitter Bootstrap on Rails</title>
    <link href="http://www.jbmyid.in/blog/bootstrap-on-rails"/>
-   <updated>2014-04-15T00:00:00+05:30</updated>
+   <updated>2014-04-15T00:00:00-07:00</updated>
    <id>http://www.jbmyid.in/blog/bootstrap-on-rails</id>
    <content type="html">&lt;h1 id=&quot;setup-twitter-bootstrap-on-rails&quot;&gt;“Setup Twitter Bootstrap on Rails”&lt;/h1&gt;
 &lt;p&gt;Twitter Bootstrap is the most popular front-end framework for developing responsive, mobile first projects on the web. This is the most basic thing needed in rails app if no UI yet finaled yet or to design your responsive web layout.
@@ -83,7 +83,7 @@ You are welcome :P
  <entry>
    <title>Installing Ubuntu 13.10 in dual boot with windows 8.1</title>
    <link href="http://www.jbmyid.in/blog/installing-ubuntu-on-efi-enabled-laptop"/>
-   <updated>2014-04-12T00:00:00+05:30</updated>
+   <updated>2014-04-12T00:00:00-07:00</updated>
    <id>http://www.jbmyid.in/blog/installing-ubuntu-on-efi-enabled-laptop</id>
    <content type="html">&lt;h1 id=&quot;installing-ubuntu-1310-in-dual-boot-with-windows-81&quot;&gt;Installing Ubuntu 13.10 in dual boot with windows 8.1&lt;/h1&gt;
 
@@ -186,7 +186,7 @@ After a long strugle I have learned how to install windows 8.1 and ubuntu 13.10 
  <entry>
    <title>Quick Rails Deployment with Capistrano</title>
    <link href="http://www.jbmyid.in/blog/rails-4-capistrano"/>
-   <updated>2014-04-04T00:00:00+05:30</updated>
+   <updated>2014-04-04T00:00:00-07:00</updated>
    <id>http://www.jbmyid.in/blog/rails-4-capistrano</id>
    <content type="html">&lt;h1 id=&quot;deploying-rails-4-app-with-capistrano-3&quot;&gt;Deploying Rails 4 App with Capistrano 3&lt;/h1&gt;
 
@@ -304,7 +304,7 @@ require &#39;capistrano/rails&#39;
  <entry>
    <title>Generate PDF(e-ticket) from html in Rails</title>
    <link href="http://www.jbmyid.in/blog/html-to-pdf"/>
-   <updated>2014-04-04T00:00:00+05:30</updated>
+   <updated>2014-04-04T00:00:00-07:00</updated>
    <id>http://www.jbmyid.in/blog/html-to-pdf</id>
    <content type="html">&lt;h1 id=&quot;pdfe-ticket-from-html-in-rails&quot;&gt;PDF(e-ticket) from html in Rails&lt;/h1&gt;
 

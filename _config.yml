@@ -9,13 +9,13 @@ permalink:	/blog/:title
 title:		jbmyid
 tagline:	'blog'
 description:	'My personal blog.'
-url:		http://www.jbmyid.in
+url:		http://blog.jbmyid.in
 commentsystem:	google
 # disqus:		example
 
 author:
   name:		'Jalendra Bhanarkar'
-  url:		https://google.com/+IanCamporezBrunelli
+  # url:		https://google.com/+IanCamporezBrunelli
 
 paginate:	5
 
@@ -33,7 +33,7 @@ social:
     desc:	Fork me on github
 
   - icon:	googleplus-alt
-    url:	https://google.com/+jbmyid
+    url:	https://plus.google.com/u/0/+JalendraBhanarkar
     desc:	Add me on google+
 
   - icon:	feed

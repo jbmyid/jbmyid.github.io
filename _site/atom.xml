@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
  <title>jbmyid</title>
- <link href="http://www.jbmyid.in/atom.xml" rel="self"/>
- <link href="http://www.jbmyid.in/"/>
- <updated>2014-04-15T19:28:33+05:30</updated>
- <id>http://www.jbmyid.in</id>
+ <link href="http://blog.jbmyid.in/atom.xml" rel="self"/>
+ <link href="http://blog.jbmyid.in/"/>
+ <updated>2014-06-27T16:26:25+05:30</updated>
+ <id>http://blog.jbmyid.in</id>
  <author>
    <name>Jalendra Bhanarkar</name>
    <email></email>
@@ -13,10 +13,105 @@
 
  
  <entry>
+   <title>Push Notification using AWS SNS on rails</title>
+   <link href="http://blog.jbmyid.in/blog/aws-sns-gcm-push-notifications"/>
+   <updated>2014-06-27T00:00:00+05:30</updated>
+   <id>http://blog.jbmyid.in/blog/aws-sns-gcm-push-notifications</id>
+   <content type="html">&lt;h1 id=&quot;push-notification-using-aws-sns-on-rails&quot;&gt;Push Notification using AWS SNS on rails&lt;/h1&gt;
+
+&lt;p&gt;Prerequisites.&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;
+    &lt;p&gt;AWS account&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Note Down the Amazon access_key_id, secret_access_key and region&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Create an Application in Amazon/SNS Section&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Note Down the Application Platform ARN&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Set ENV variables:&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ol&gt;
+&lt;pre&gt;
+    &lt;code class=&quot;ruby&quot;&gt;
+      ENV[&#39;SNS_APP_ARN&#39;] = the arn obtained from 4th step
+      ENV[&#39;AWS_ACCESS_KEY_ID&#39;] = obtained from step 2
+      ENV[&#39;AWS_SECRET_ACCESS_KEY&#39;]= obtained from step 2
+    &lt;/code&gt;
+  &lt;/pre&gt;
+
+&lt;h1 id=&quot;getting-started-with-aws-sdk-gem&quot;&gt;Getting Started with ‘aws-sdk’ gem&lt;/h1&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Add gem ‘aws-sdk’&lt;/li&gt;
+  &lt;li&gt;bundle install&lt;/li&gt;
+  &lt;li&gt;Set configuration for aws
+    &lt;ul&gt;
+      &lt;li&gt;Create aws_config.rb in config/initializers directory and add following
+        &lt;pre&gt;AWS.config(access_key_id: ENV[&#39;AWS_ACCESS_KEY_ID&#39;], secret_access_key: ENV[&#39;AWS_SECRET_ACCESS_KEY&#39;], region: &quot;region_code&quot;)&lt;/pre&gt;
+      &lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h1 id=&quot;using-aws-sdk&quot;&gt;Using AWS SDK&lt;/h1&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Create an sns object
+    &lt;pre&gt;
+  sns = AWS::SNS.new
+&lt;/pre&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Set sns client
+    &lt;pre&gt;client = sns.client&lt;/pre&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Whenever device registers on your site get GCM registration id and store it in your database, and every time the gmc registration id changes subscribe it in SNS
+    &lt;pre&gt;response = client.create_platform_endpoint token: gcm_registraion_id, platform_application_arn: ENV[&#39;SNS_APP_ARN&#39;]&lt;/pre&gt;
+    &lt;ul&gt;
+      &lt;li&gt;the response will contain the end_point_arn for the device registered, which will be used in sending notifications&lt;/li&gt;
+    &lt;/ul&gt;
+    &lt;pre&gt;device_arn = response[:endpoint_arn] # save it&lt;/pre&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h1 id=&quot;publishing-notification&quot;&gt;Publishing Notification:&lt;/h1&gt;
+&lt;pre&gt;
+  gcm_message = {collapse_key: &quot;any_collapse_key&quot;, data: {key: &quot;Value&quot;}}
+  message = {&quot;GCM&quot;=&amp;gt; gcm_message.to_json}.to_json
+&lt;/pre&gt;
+&lt;pre&gt;
+  response = client.publish target_arn: device_arn, message: message , message_structure: &#39;json&#39;
+&lt;/pre&gt;
+&lt;div class=&quot;message&quot;&gt;Notification Sent!&lt;/div&gt;
+
+&lt;p&gt;Whenever gcm registration id changes remove the existing target_arn and add new one
+To remove the existing target arn&lt;/p&gt;
+&lt;pre&gt;
+  client.delete_endpoint(endpoint_arn: device_arn)
+&lt;/pre&gt;
+
+&lt;p&gt;You can broad cast the notification by creating topics and subscribing the arn to the particular topic and publish specifying topic_arn&lt;/p&gt;
+
+&lt;p&gt;e.g.&lt;/p&gt;
+&lt;pre&gt;
+  response = client.publish topic_arn: topic_arn, message: message , message_structure: &#39;json&#39;
+&lt;/pre&gt;
+
+&lt;h1 id=&quot;thank-you&quot;&gt;THANK YOU&lt;/h1&gt;
+</content>
+ </entry>
+ 
+ <entry>
    <title>Setup Twitter Bootstrap on Rails</title>
-   <link href="http://www.jbmyid.in/blog/bootstrap-on-rails"/>
+   <link href="http://blog.jbmyid.in/blog/bootstrap-on-rails"/>
    <updated>2014-04-15T00:00:00+05:30</updated>
-   <id>http://www.jbmyid.in/blog/bootstrap-on-rails</id>
+   <id>http://blog.jbmyid.in/blog/bootstrap-on-rails</id>
    <content type="html">&lt;h1 id=&quot;setup-twitter-bootstrap-on-rails&quot;&gt;“Setup Twitter Bootstrap on Rails”&lt;/h1&gt;
 &lt;p&gt;Twitter Bootstrap is the most popular front-end framework for developing responsive, mobile first projects on the web. This is the most basic thing needed in rails app if no UI yet finaled yet or to design your responsive web layout.
 &lt;br /&gt;
@@ -82,9 +177,9 @@ You are welcome :P
  
  <entry>
    <title>Installing Ubuntu 13.10 in dual boot with windows 8.1</title>
-   <link href="http://www.jbmyid.in/blog/installing-ubuntu-on-efi-enabled-laptop"/>
+   <link href="http://blog.jbmyid.in/blog/installing-ubuntu-on-efi-enabled-laptop"/>
    <updated>2014-04-12T00:00:00+05:30</updated>
-   <id>http://www.jbmyid.in/blog/installing-ubuntu-on-efi-enabled-laptop</id>
+   <id>http://blog.jbmyid.in/blog/installing-ubuntu-on-efi-enabled-laptop</id>
    <content type="html">&lt;h1 id=&quot;installing-ubuntu-1310-in-dual-boot-with-windows-81&quot;&gt;Installing Ubuntu 13.10 in dual boot with windows 8.1&lt;/h1&gt;
 
 &lt;p&gt;Recently I bought Lenovo G510 which have efi feature for boot options. I have struglled a lot to install ubuntu and windows both in dual boot.
@@ -185,9 +280,9 @@ After a long strugle I have learned how to install windows 8.1 and ubuntu 13.10 
  
  <entry>
    <title>Quick Rails Deployment with Capistrano</title>
-   <link href="http://www.jbmyid.in/blog/rails-4-capistrano"/>
+   <link href="http://blog.jbmyid.in/blog/rails-4-capistrano"/>
    <updated>2014-04-04T00:00:00+05:30</updated>
-   <id>http://www.jbmyid.in/blog/rails-4-capistrano</id>
+   <id>http://blog.jbmyid.in/blog/rails-4-capistrano</id>
    <content type="html">&lt;h1 id=&quot;deploying-rails-4-app-with-capistrano-3&quot;&gt;Deploying Rails 4 App with Capistrano 3&lt;/h1&gt;
 
 &lt;p&gt;Assuming we have a rails app as my_blog
@@ -303,9 +398,9 @@ require &#39;capistrano/rails&#39;
  
  <entry>
    <title>Generate PDF(e-ticket) from html in Rails</title>
-   <link href="http://www.jbmyid.in/blog/html-to-pdf"/>
+   <link href="http://blog.jbmyid.in/blog/html-to-pdf"/>
    <updated>2014-04-04T00:00:00+05:30</updated>
-   <id>http://www.jbmyid.in/blog/html-to-pdf</id>
+   <id>http://blog.jbmyid.in/blog/html-to-pdf</id>
    <content type="html">&lt;h1 id=&quot;pdfe-ticket-from-html-in-rails&quot;&gt;PDF(e-ticket) from html in Rails&lt;/h1&gt;
 
 &lt;p&gt;Following are the steps for creating pdf from html views.&lt;/p&gt;

@@ -4,13 +4,74 @@
  <title>jbmyid</title>
  <link href="http://blog.jbmyid.in/atom.xml" rel="self"/>
  <link href="http://blog.jbmyid.in/"/>
- <updated>2014-06-27T16:26:25+05:30</updated>
+ <updated>2014-08-12T19:18:46+05:30</updated>
  <id>http://blog.jbmyid.in</id>
  <author>
    <name>Jalendra Bhanarkar</name>
    <email></email>
  </author>
 
+ 
+ <entry>
+   <title>Client Side Validation in Rails</title>
+   <link href="http://blog.jbmyid.in/blog/client-side-validation-in-rails"/>
+   <updated>2014-08-12T00:00:00+05:30</updated>
+   <id>http://blog.jbmyid.in/blog/client-side-validation-in-rails</id>
+   <content type="html">&lt;h1 id=&quot;setup-gem&quot;&gt;Setup Gem&lt;/h1&gt;
+
+&lt;p&gt;How to setup application to use rails_jq_validations gem.&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Add gem “rails_jq_validations” in gemfile
+    &lt;ul&gt;
+      &lt;li&gt;
+        &lt;pre&gt;gem &quot;rails_jq_validations&quot;, git: &quot;git@github.com:jbmyid/rails_jq_validations.git&quot;&lt;/pre&gt;
+      &lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Run &lt;code&gt;bundle install&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;Add js to your application.js
+    &lt;ul&gt;
+      &lt;li&gt;
+        &lt;pre&gt; //= require rails_jq_validations/form_validator &lt;/pre&gt;
+      &lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h1 id=&quot;adding-client-side-validation-to-form&quot;&gt;Adding Client side validation to form&lt;/h1&gt;
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;Considering you are having &lt;code&gt;Product&lt;/code&gt; model and you have added &lt;code&gt;validates :name, presence: true&lt;/code&gt; to your model.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Add  &lt;code&gt;data: {validate: true}&lt;/code&gt; to your &lt;code&gt;form_for&lt;/code&gt; heleper like following&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;pre&gt;
+&lt;code class=&quot;ruby&quot;&gt;
+  #_form.html.erb
+  &amp;lt;%= form_for @product, data: {validate: true} do |f| %&amp;gt;
+    &amp;lt;%= f.text_field :name %&amp;gt;
+
+    &amp;lt;%= f.submit %&amp;gt;
+  &amp;lt;% end %&amp;gt;
+&lt;/code&gt;
+&lt;/pre&gt;
+&lt;p&gt;Will give you output as follow(message which is set in en.yml for your models)&lt;/p&gt;
+
+&lt;div id=&quot;article-img&quot;&gt;&lt;a href=&quot;/media/2014-08-12-client-side-validation-in-rails/validation.png&quot; target=&quot;_blank&quot;&gt;&lt;img src=&quot;/media/2014-08-12-client-side-validation-in-rails/validation.png&quot; alt=&quot;&quot; width=&quot;auto&quot; /&gt;&lt;/a&gt;
+&lt;blockquote style=&quot;border-left: 10px solid #D5D5D5;&quot;&gt;&lt;/blockquote&gt;&lt;/div&gt;
+
+&lt;p&gt;It uses jquery &lt;a href=&quot;http://jqueryvalidation.org/&quot;&gt;validation plugin&lt;/a&gt;, so you can add any additional specific rule to particular field. Like following.&lt;/p&gt;
+&lt;pre&gt;
+&amp;lt;%= f.text_field :name, data:{&quot;jq-rules&quot;=&amp;gt; {required: true, number: true, messages: {required: &quot;Please enter name.&quot;}}.to_json}%&amp;gt;
+&lt;/pre&gt;
+
+&lt;div class=&quot;message&quot;&gt;Note: styling error messages are upto you. You can set default error message placement with validation plugin.&lt;/div&gt;
+</content>
+ </entry>
  
  <entry>
    <title>Push Notification using AWS SNS on rails</title>
@@ -53,32 +114,32 @@
   &lt;li&gt;bundle install&lt;/li&gt;
   &lt;li&gt;Set configuration for aws
     &lt;ul&gt;
-      &lt;li&gt;Create aws_config.rb in config/initializers directory and add following
-        &lt;pre&gt;AWS.config(access_key_id: ENV[&#39;AWS_ACCESS_KEY_ID&#39;], secret_access_key: ENV[&#39;AWS_SECRET_ACCESS_KEY&#39;], region: &quot;region_code&quot;)&lt;/pre&gt;
-      &lt;/li&gt;
+      &lt;li&gt;Create aws_config.rb in config/initializers directory and add following&lt;/li&gt;
     &lt;/ul&gt;
+    &lt;pre&gt;AWS.config(access_key_id: ENV[&#39;AWS_ACCESS_KEY_ID&#39;], secret_access_key: ENV[&#39;AWS_SECRET_ACCESS_KEY&#39;], region: &quot;region_code&quot;)&lt;/pre&gt;
   &lt;/li&gt;
 &lt;/ul&gt;
 
 &lt;h1 id=&quot;using-aws-sdk&quot;&gt;Using AWS SDK&lt;/h1&gt;
 
 &lt;ul&gt;
-  &lt;li&gt;Create an sns object
-    &lt;pre&gt;
-  sns = AWS::SNS.new
-&lt;/pre&gt;
-  &lt;/li&gt;
-  &lt;li&gt;Set sns client
-    &lt;pre&gt;client = sns.client&lt;/pre&gt;
-  &lt;/li&gt;
-  &lt;li&gt;Whenever device registers on your site get GCM registration id and store it in your database, and every time the gmc registration id changes subscribe it in SNS
-    &lt;pre&gt;response = client.create_platform_endpoint token: gcm_registraion_id, platform_application_arn: ENV[&#39;SNS_APP_ARN&#39;]&lt;/pre&gt;
-    &lt;ul&gt;
-      &lt;li&gt;the response will contain the end_point_arn for the device registered, which will be used in sending notifications&lt;/li&gt;
-    &lt;/ul&gt;
-    &lt;pre&gt;device_arn = response[:endpoint_arn] # save it&lt;/pre&gt;
-  &lt;/li&gt;
+  &lt;li&gt;Create an sns object&lt;/li&gt;
 &lt;/ul&gt;
+&lt;pre&gt;
+    sns = AWS::SNS.new
+  &lt;/pre&gt;
+&lt;ul&gt;
+  &lt;li&gt;Set sns client&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre&gt;client = sns.client&lt;/pre&gt;
+&lt;ul&gt;
+  &lt;li&gt;Whenever device registers on your site get GCM registration id and store it in your database, and every time the gmc registration id changes subscribe it in SNS&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre&gt;response = client.create_platform_endpoint token: gcm_registraion_id, platform_application_arn: ENV[&#39;SNS_APP_ARN&#39;]&lt;/pre&gt;
+&lt;ul&gt;
+  &lt;li&gt;the response will contain the end_point_arn for the device registered, which will be used in sending notifications&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre&gt;device_arn = response[:endpoint_arn] # save it&lt;/pre&gt;
 
 &lt;h1 id=&quot;publishing-notification&quot;&gt;Publishing Notification:&lt;/h1&gt;
 &lt;pre&gt;
@@ -163,15 +224,13 @@ To integrate twitter bootstrap in your rails project you can do any of the follo
 &lt;h4 id=&quot;if-even-after-doing-all-above-steps-the-glyphicons-doesnt-work-then&quot;&gt;If even after doing all above steps the glyphicons doesnt work then&lt;/h4&gt;
 
 &lt;ul&gt;
-  &lt;li&gt;
-    &lt;p&gt;move the fonts to &lt;code&gt;yourApp/app/assets/fonts/&lt;/code&gt;. And change fonts path in &lt;code&gt;application.rb&lt;/code&gt;
-&lt;br /&gt;i.e.  &lt;code&gt;config.assets.paths &amp;lt;&amp;lt; &quot;#{Rails}/assets/fonts&quot;&lt;/code&gt;&lt;/p&gt;
-
-    &lt;div class=&quot;message&quot;&gt;
-You are welcome :P
-&lt;/div&gt;
-  &lt;/li&gt;
+  &lt;li&gt;move the fonts to &lt;code&gt;yourApp/app/assets/fonts/&lt;/code&gt;. And change fonts path in &lt;code&gt;application.rb&lt;/code&gt;
+&lt;br /&gt;i.e.  &lt;code&gt;config.assets.paths &amp;lt;&amp;lt; &quot;#{Rails}/assets/fonts&quot;&lt;/code&gt;&lt;/li&gt;
 &lt;/ul&gt;
+
+&lt;div class=&quot;message&quot;&gt;
+  You are welcome :P
+  &lt;/div&gt;
 </content>
  </entry>
  
@@ -230,34 +289,23 @@ After a long strugle I have learned how to install windows 8.1 and ubuntu 13.10 
     &lt;ul&gt;
       &lt;li&gt;Select any of the option from boot screen but dont press enter&lt;/li&gt;
     &lt;/ul&gt;
-
-    &lt;div id=&quot;article-img&quot;&gt;&lt;a href=&quot;/media/2014-04-12-installing-ubuntu-on-efi-enabled-laptop/boot.png&quot; target=&quot;_blank&quot;&gt;&lt;img src=&quot;/media/2014-04-12-installing-ubuntu-on-efi-enabled-laptop/boot.png&quot; alt=&quot;&quot; width=&quot;100%&quot; /&gt;&lt;/a&gt;
-&lt;blockquote style=&quot;border-left: 10px solid #D5D5D5;&quot;&gt;&lt;/blockquote&gt;&lt;/div&gt;
-
-    &lt;ul&gt;
-      &lt;li&gt;Press &lt;code&gt;e&lt;/code&gt; and add &lt;code&gt;acpi_osi=Linux acpi_backlight=vendor&lt;/code&gt; in boot options before &lt;code&gt;quiet splash&lt;/code&gt;&lt;/li&gt;
-      &lt;li&gt;Press F10 to boot&lt;/li&gt;
-    &lt;/ul&gt;
-    &lt;pre&gt;Note: This step will be required each time you boot.&lt;/pre&gt;
   &lt;/li&gt;
-  &lt;li&gt;If you see a message “System is running low graphics” kind of thing from where you can not prceed further.
-    &lt;ul&gt;
-      &lt;li&gt;Add &lt;code&gt;nomodeset&lt;/code&gt; in boot options before &lt;code&gt;quiet splash&lt;/code&gt;&lt;/li&gt;
-      &lt;li&gt;And follow 9 th step&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-  &lt;li&gt;Now moving to installation of ubuntu 
-    &lt;ul&gt;
-      &lt;li&gt;Install from try ubuntu or Install unbuntu option&lt;/li&gt;
-      &lt;li&gt;Select &lt;code&gt;Something Else&lt;/code&gt; option&lt;/li&gt;
-      &lt;li&gt;Now when the partition selection screen appear choose free space which was freed from windows of 10/20 GB&lt;/li&gt;
-      &lt;li&gt;click &lt;code&gt;+&lt;/code&gt; button and type 2 GB(i.e 2048 MB) and select swap area option from drop down and press create button&lt;/li&gt;
-      &lt;li&gt;select free space again and click &lt;code&gt;+&lt;/code&gt; button and select &lt;code&gt;/&lt;/code&gt; (root) from dropdown and press create.&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-  &lt;li&gt;Continue installation&lt;/li&gt;
-  &lt;li&gt;Now while booting ubuntu if you encounter blank screen with blinking cursor then enable Legacy Support from boot menu (I had to do it. Without enabling Legacy support i was not able to see ubuntu ui). &lt;/li&gt;
 &lt;/ol&gt;
+
+&lt;pre&gt;&lt;code&gt;&amp;lt;div id=&quot;article-img&quot;&amp;gt;&amp;lt;a href=&quot;/media/2014-04-12-installing-ubuntu-on-efi-enabled-laptop/boot.png&quot; target=&quot;_blank&quot;&amp;gt;&amp;lt;img src=&quot;/media/2014-04-12-installing-ubuntu-on-efi-enabled-laptop/boot.png&quot; alt=&quot;&quot; width=&quot;100%&quot; /&amp;gt;&amp;lt;/a&amp;gt; &amp;lt;blockquote style=&quot;border-left: 10px solid #D5D5D5;&quot;&amp;gt;&amp;lt;/blockquote&amp;gt;&amp;lt;/div&amp;gt;
+
+
+* Press `e` and add `acpi_osi=Linux acpi_backlight=vendor` in boot options before `quiet splash`
+* Press F10 to boot
+&amp;lt;pre&amp;gt;Note: This step will be required each time you boot.&amp;lt;/pre&amp;gt; 10. If you see a message &quot;System is running low graphics&quot; kind of thing from where you can not prceed further.
+* Add `nomodeset` in boot options before `quiet splash`
+* And follow 9 th step 11. Now moving to installation of ubuntu 
+* Install from try ubuntu or Install unbuntu option
+* Select `Something Else` option
+* Now when the partition selection screen appear choose free space which was freed from windows of 10/20 GB
+* click `+` button and type 2 GB(i.e 2048 MB) and select swap area option from drop down and press create button
+* select free space again and click `+` button and select `/` (root) from dropdown and press create. 12. Continue installation 13. Now while booting ubuntu if you encounter blank screen with blinking cursor then enable Legacy Support from boot menu (I had to do it. Without enabling Legacy support i was not able to see ubuntu ui). 
+&lt;/code&gt;&lt;/pre&gt;
 
 &lt;h1 id=&quot;afer-installation&quot;&gt;Afer installation&lt;/h1&gt;
 &lt;p&gt;If you used point 9. or 10. to boot you will need to add it in boot default options. To do so follow these steps.&lt;/p&gt;

@@ -136,34 +136,23 @@ After a long strugle I have learned how to install windows 8.1 and ubuntu 13.10 
     <ul>
       <li>Select any of the option from boot screen but dont press enter</li>
     </ul>
-
-    <div id="article-img"><a href="/media/2014-04-12-installing-ubuntu-on-efi-enabled-laptop/boot.png" target="_blank"><img src="/media/2014-04-12-installing-ubuntu-on-efi-enabled-laptop/boot.png" alt="" width="100%" /></a>
-<blockquote style="border-left: 10px solid #D5D5D5;"></blockquote></div>
-
-    <ul>
-      <li>Press <code>e</code> and add <code>acpi_osi=Linux acpi_backlight=vendor</code> in boot options before <code>quiet splash</code></li>
-      <li>Press F10 to boot</li>
-    </ul>
-    <pre>Note: This step will be required each time you boot.</pre>
   </li>
-  <li>If you see a message “System is running low graphics” kind of thing from where you can not prceed further.
-    <ul>
-      <li>Add <code>nomodeset</code> in boot options before <code>quiet splash</code></li>
-      <li>And follow 9 th step</li>
-    </ul>
-  </li>
-  <li>Now moving to installation of ubuntu 
-    <ul>
-      <li>Install from try ubuntu or Install unbuntu option</li>
-      <li>Select <code>Something Else</code> option</li>
-      <li>Now when the partition selection screen appear choose free space which was freed from windows of 10/20 GB</li>
-      <li>click <code>+</code> button and type 2 GB(i.e 2048 MB) and select swap area option from drop down and press create button</li>
-      <li>select free space again and click <code>+</code> button and select <code>/</code> (root) from dropdown and press create.</li>
-    </ul>
-  </li>
-  <li>Continue installation</li>
-  <li>Now while booting ubuntu if you encounter blank screen with blinking cursor then enable Legacy Support from boot menu (I had to do it. Without enabling Legacy support i was not able to see ubuntu ui). </li>
 </ol>
+
+<pre><code>&lt;div id="article-img"&gt;&lt;a href="/media/2014-04-12-installing-ubuntu-on-efi-enabled-laptop/boot.png" target="_blank"&gt;&lt;img src="/media/2014-04-12-installing-ubuntu-on-efi-enabled-laptop/boot.png" alt="" width="100%" /&gt;&lt;/a&gt; &lt;blockquote style="border-left: 10px solid #D5D5D5;"&gt;&lt;/blockquote&gt;&lt;/div&gt;
+
+
+* Press `e` and add `acpi_osi=Linux acpi_backlight=vendor` in boot options before `quiet splash`
+* Press F10 to boot
+&lt;pre&gt;Note: This step will be required each time you boot.&lt;/pre&gt; 10. If you see a message "System is running low graphics" kind of thing from where you can not prceed further.
+* Add `nomodeset` in boot options before `quiet splash`
+* And follow 9 th step 11. Now moving to installation of ubuntu 
+* Install from try ubuntu or Install unbuntu option
+* Select `Something Else` option
+* Now when the partition selection screen appear choose free space which was freed from windows of 10/20 GB
+* click `+` button and type 2 GB(i.e 2048 MB) and select swap area option from drop down and press create button
+* select free space again and click `+` button and select `/` (root) from dropdown and press create. 12. Continue installation 13. Now while booting ubuntu if you encounter blank screen with blinking cursor then enable Legacy Support from boot menu (I had to do it. Without enabling Legacy support i was not able to see ubuntu ui). 
+</code></pre>
 
 <h1 id="afer-installation">Afer installation</h1>
 <p>If you used point 9. or 10. to boot you will need to add it in boot default options. To do so follow these steps.</p>

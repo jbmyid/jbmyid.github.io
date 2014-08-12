@@ -122,32 +122,32 @@
   <li>bundle install</li>
   <li>Set configuration for aws
     <ul>
-      <li>Create aws_config.rb in config/initializers directory and add following
-        <pre>AWS.config(access_key_id: ENV['AWS_ACCESS_KEY_ID'], secret_access_key: ENV['AWS_SECRET_ACCESS_KEY'], region: "region_code")</pre>
-      </li>
+      <li>Create aws_config.rb in config/initializers directory and add following</li>
     </ul>
+    <pre>AWS.config(access_key_id: ENV['AWS_ACCESS_KEY_ID'], secret_access_key: ENV['AWS_SECRET_ACCESS_KEY'], region: "region_code")</pre>
   </li>
 </ul>
 
 <h1 id="using-aws-sdk">Using AWS SDK</h1>
 
 <ul>
-  <li>Create an sns object
-    <pre>
-  sns = AWS::SNS.new
-</pre>
-  </li>
-  <li>Set sns client
-    <pre>client = sns.client</pre>
-  </li>
-  <li>Whenever device registers on your site get GCM registration id and store it in your database, and every time the gmc registration id changes subscribe it in SNS
-    <pre>response = client.create_platform_endpoint token: gcm_registraion_id, platform_application_arn: ENV['SNS_APP_ARN']</pre>
-    <ul>
-      <li>the response will contain the end_point_arn for the device registered, which will be used in sending notifications</li>
-    </ul>
-    <pre>device_arn = response[:endpoint_arn] # save it</pre>
-  </li>
+  <li>Create an sns object</li>
 </ul>
+<pre>
+    sns = AWS::SNS.new
+  </pre>
+<ul>
+  <li>Set sns client</li>
+</ul>
+<pre>client = sns.client</pre>
+<ul>
+  <li>Whenever device registers on your site get GCM registration id and store it in your database, and every time the gmc registration id changes subscribe it in SNS</li>
+</ul>
+<pre>response = client.create_platform_endpoint token: gcm_registraion_id, platform_application_arn: ENV['SNS_APP_ARN']</pre>
+<ul>
+  <li>the response will contain the end_point_arn for the device registered, which will be used in sending notifications</li>
+</ul>
+<pre>device_arn = response[:endpoint_arn] # save it</pre>
 
 <h1 id="publishing-notification">Publishing Notification:</h1>
 <pre>
@@ -193,24 +193,22 @@ To remove the existing target arn</p>
 </div>
 
 	
-		
-		
-		
-		
-		
-		
+	
+	
+	
+	
 	
 
-<footer class="clean" style="background-image: url(/media/2014-04-15-bootstrap-on-rails/twitter_bootstrap-wallpaper-1024x768.jpg); height: 75%; min-height: 500px;" data-stellar-background-ratio="0.5" data-stellar-horizontal-offset="50" data-stellar-vertical-offset="50">
+<footer class="clean" style="background-image: url(/media/2014-08-12-client-side-validation-in-rails/ruby.jpg); height: 75%; min-height: 500px;" data-stellar-background-ratio="0.5" data-stellar-horizontal-offset="50" data-stellar-vertical-offset="50">
 	<div id="nav-icon" style="top: 60px;" data-stellar-ratio="0.8">
 		<a class="scroll" data-speed="500" href="#article"><span class="genericon genericon-collapse"></span></a>
 	</div>
 	<div id="post-info" data-stellar-ratio="0.5" data-stellar-vertical-offset="120">
-		<h3>Featured post</h3>
-		<a href="/blog/bootstrap-on-rails">
-			<h1>Setup Twitter Bootstrap on Rails</h1>
+		<h3>Read next</h3>
+		<a href="/blog/client-side-validation-in-rails">
+			<h1>Client Side Validation in Rails</h1>
 			
-				<h2>Setting up bootstrap on rails with assets precompiling fix.</h2>
+				<h2>Client side validation in rails using gem rails_jq_validations.</h2>
 			
 		</a>
 	</div>

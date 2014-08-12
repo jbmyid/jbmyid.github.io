@@ -4,16 +4,16 @@
 	
 	<link href="//gmpg.org/xfn/11" rel="profile">
 	<meta http-equiv="content-type" content="text/html; charset=utf-8">
-	<link rel="canonical" href="http://blog.jbmyid.in/blog/bootstrap-on-rails" />
-	<meta name="description" content="Setting up bootstrap on rails with assets precompiling fix." />
-	<meta property="og:description" content="Setting up bootstrap on rails with assets precompiling fix." />
-	<meta itemprop="image" content="http://blog.jbmyid.in/media/2014-04-15-bootstrap-on-rails/twitter_bootstrap-wallpaper-1024x768.jpg" />
-	<meta property="og:image" content="http://blog.jbmyid.in/media/2014-04-15-bootstrap-on-rails/twitter_bootstrap-wallpaper-1024x768.jpg" />
-	<meta property="og:title" content="Setup Twitter Bootstrap on Rails" />
+	<link rel="canonical" href="http://blog.jbmyid.in/blog/client-side-validation-in-rails" />
+	<meta name="description" content="Client side validation in rails using gem rails_jq_validations." />
+	<meta property="og:description" content="Client side validation in rails using gem rails_jq_validations." />
+	<meta itemprop="image" content="http://blog.jbmyid.in/media/2014-08-12-client-side-validation-in-rails/ruby.jpg" />
+	<meta property="og:image" content="http://blog.jbmyid.in/media/2014-08-12-client-side-validation-in-rails/ruby.jpg" />
+	<meta property="og:title" content="Client Side Validation in Rails" />
 	<meta property="og:type" content="article" />
-	<meta property="og:url" content="http://blog.jbmyid.in/blog/bootstrap-on-rails" />
+	<meta property="og:url" content="http://blog.jbmyid.in/blog/client-side-validation-in-rails" />
 	<meta property="og:site_name" content="jbmyid" />
-	<title>Setup Twitter Bootstrap on Rails &middot; jbmyid</title>
+	<title>Client Side Validation in Rails &middot; jbmyid</title>
 	<meta name="mobile-web-app-capable" content="yes">
 	<meta name="HandheldFriendly" content="True" />
 	<meta name="MobileOptimized" content="320" />
@@ -31,7 +31,7 @@
 </head>
 
 	<body>
-		<header class="clean" style="background-image: url(/media/2014-04-15-bootstrap-on-rails/twitter_bootstrap-wallpaper-1024x768.jpg); height: 100%;" data-stellar-background-ratio="0.5" data-stellar-horizontal-offset="50">
+		<header class="clean" style="background-image: url(/media/2014-08-12-client-side-validation-in-rails/ruby.jpg); height: 100%;" data-stellar-background-ratio="0.5" data-stellar-horizontal-offset="50">
 	
 	
 	<label class="menu" for="_1">
@@ -70,11 +70,11 @@
 </div>
 
 	<div id="post-info" data-stellar-ratio="0.7">
-		<h1>Setup Twitter Bootstrap on Rails</h1>
+		<h1>Client Side Validation in Rails</h1>
 		
-			<h2>Setting up bootstrap on rails with assets precompiling fix.</h2>
+			<h2>Client side validation in rails using gem rails_jq_validations.</h2>
 		
-		<a class="site-title" href="http://blog.jbmyid.in"><div class="site-icon-small" style="background-image: url(/assets/images/icon.png);"></div>jbmyid</a>, in 15 April 2014
+		<a class="site-title" href="http://blog.jbmyid.in"><div class="site-icon-small" style="background-image: url(/assets/images/icon.png);"></div>jbmyid</a>, in 12 August 2014
 	</div>
 	<div id="nav-icon" style="bottom: 30px;" data-stellar-ratio="4">
 		<a class="scroll" data-speed="500" href="#article"><span class="genericon genericon-expand"></span></a>
@@ -82,64 +82,59 @@
 </header>
 <div id="middle">
 	<div id="article">
-		<h1 id="setup-twitter-bootstrap-on-rails">“Setup Twitter Bootstrap on Rails”</h1>
-<p>Twitter Bootstrap is the most popular front-end framework for developing responsive, mobile first projects on the web. This is the most basic thing needed in rails app if no UI yet finaled yet or to design your responsive web layout.
-<br />
-To integrate twitter bootstrap in your rails project you can do any of the following method.</p>
+		<h1 id="setup-gem">Setup Gem</h1>
+
+<p>How to setup application to use rails_jq_validations gem.</p>
 
 <ul>
-  <li>Using gem ‘twitter-bootstrap-rails’ from <a href="https://github.com/seyhunak/twitter-bootstrap-rails/tree/bootstrap3">here</a></li>
-  <li>Or below steps to integrate without gem</li>
+  <li>Add gem “rails_jq_validations” in gemfile
+    <ul>
+      <li>
+        <pre>gem "rails_jq_validations", git: "git@github.com:jbmyid/rails_jq_validations.git"</pre>
+      </li>
+    </ul>
+  </li>
+  <li>Run <code>bundle install</code></li>
+  <li>Add js to your application.js
+    <ul>
+      <li>
+        <pre> //= require rails_jq_validations/form_validator </pre>
+      </li>
+    </ul>
+  </li>
 </ul>
 
-<h4 id="here-are-the-steps-which-will-be-needed-to-integrate-twitter-bootstrap-in-rails-app">Here are the steps which will be needed to integrate twitter bootstrap in rails app.</h4>
-
-<ol>
-  <li>Download bootstap from <a href="http://getbootstrap.com/getting-started/#download">here</a></li>
-  <li>Extract the zip file and copy assets folder content to <code>yourApp/vendor/assets/</code></li>
-  <li>Now you will have following folder in <code>vendor/assets/</code> directory
-    <ul>
-      <li>fonts</li>
-      <li>stylesheets</li>
-      <li>javascripts</li>
-    </ul>
-  </li>
-  <li>Create <code>bootstrap_overrides.css.scss</code> in <code>yourApp/app/assets/stylesheets/</code> directory and add following line at the top.
-    <ul>
-      <li><code>@import "bootstrap";</code></li>
-    </ul>
-  </li>
-  <li>Rename your <code>application.css</code> file to <code>application.css.scss</code></li>
-  <li>Add <code>*= require bootstrap_overrides</code> to your <code>application.css.scss</code></li>
-  <li>Add following code to your <code>bootstrap_overrides.css.scss</code> file
-  *
-    <pre>
-   <code class="ruby">
-     @font-face {
-       font-family: 'Glyphicons Halflings';
-       src: url(asset_path('glyphicons-halflings-regular.eot'));
-       src: url(asset_path('glyphicons-halflings-regular.eot?#iefix')) format('embedded-opentype'), url(asset_path('glyphicons-halflings-regular.woff')) format('woff'), url(asset_path('glyphicons-halflings-regular.ttf')) format('truetype'), url(asset_path('glyphicons-halflings-regular.svg#glyphicons_halflingsregular')) format('svg');
-     }
-   </code>
- </pre>
-    <div class="message">
-   Above code is to fix the glyphicons issue in asset pipelining (in production).
- </div>
-  </li>
-  <li>Add <code>config.assets.paths &lt;&lt; "#{Rails}/vendor/assets/fonts"</code> in your <code>application.rb</code></li>
-  <li>Add <code>//= require bootstrap.min</code> in your application.js if you want to include bootstrap js.</li>
-</ol>
-
-<h4 id="if-even-after-doing-all-above-steps-the-glyphicons-doesnt-work-then">If even after doing all above steps the glyphicons doesnt work then</h4>
-
+<h1 id="adding-client-side-validation-to-form">Adding Client side validation to form</h1>
 <ul>
-  <li>move the fonts to <code>yourApp/app/assets/fonts/</code>. And change fonts path in <code>application.rb</code>
-<br />i.e.  <code>config.assets.paths &lt;&lt; "#{Rails}/assets/fonts"</code></li>
+  <li>
+    <p>Considering you are having <code>Product</code> model and you have added <code>validates :name, presence: true</code> to your model.</p>
+  </li>
+  <li>
+    <p>Add  <code>data: {validate: true}</code> to your <code>form_for</code> heleper like following</p>
+  </li>
 </ul>
 
-<div class="message">
-  You are welcome :P
-  </div>
+<pre>
+<code class="ruby">
+  #_form.html.erb
+  &lt;%= form_for @product, data: {validate: true} do |f| %&gt;
+    &lt;%= f.text_field :name %&gt;
+
+    &lt;%= f.submit %&gt;
+  &lt;% end %&gt;
+</code>
+</pre>
+<p>Will give you output as follow(message which is set in en.yml for your models)</p>
+
+<div id="article-img"><a href="/media/2014-08-12-client-side-validation-in-rails/validation.png" target="_blank"><img src="/media/2014-08-12-client-side-validation-in-rails/validation.png" alt="" width="auto" /></a>
+<blockquote style="border-left: 10px solid #D5D5D5;"></blockquote></div>
+
+<p>It uses jquery <a href="http://jqueryvalidation.org/">validation plugin</a>, so you can add any additional specific rule to particular field. Like following.</p>
+<pre>
+&lt;%= f.text_field :name, data:{"jq-rules"=&gt; {required: true, number: true, messages: {required: "Please enter name."}}.to_json}%&gt;
+</pre>
+
+<div class="message">Note: styling error messages are upto you. You can set default error message placement with validation plugin.</div>
 
 	</div>
 	
@@ -147,7 +142,7 @@ To integrate twitter bootstrap in your rails project you can do any of the follo
 		
 	
 	<script src="https://apis.google.com/js/plusone.js"></script>
-	<div id="g-comments" class="g-comments" data-href="http://blog.jbmyid.in/blog/bootstrap-on-rails" data-width="700" data-first_party_property="BLOGGER" data-view_type="FILTERED_POSTMOD"></div>
+	<div id="g-comments" class="g-comments" data-href="http://blog.jbmyid.in/blog/client-side-validation-in-rails" data-width="700" data-first_party_property="BLOGGER" data-view_type="FILTERED_POSTMOD"></div>
 	<script>
 		var width = $('#comments').width() * 0.9;
 		width = Math.round(width);
@@ -160,10 +155,12 @@ To integrate twitter bootstrap in your rails project you can do any of the follo
 </div>
 
 	
-	
-	
-	
-	
+		
+		
+		
+		
+		
+		
 	
 
 <footer class="clean" style="background-image: url(/assets/images/cover.jpg); height: 75%; min-height: 500px;" data-stellar-background-ratio="0.5" data-stellar-horizontal-offset="50" data-stellar-vertical-offset="50">
@@ -171,7 +168,7 @@ To integrate twitter bootstrap in your rails project you can do any of the follo
 		<a class="scroll" data-speed="500" href="#article"><span class="genericon genericon-collapse"></span></a>
 	</div>
 	<div id="post-info" data-stellar-ratio="0.5" data-stellar-vertical-offset="120">
-		<h3>Read next</h3>
+		<h3>Featured post</h3>
 		<a href="/blog/aws-sns-gcm-push-notifications">
 			<h1>Push Notification using AWS SNS on rails</h1>
 			

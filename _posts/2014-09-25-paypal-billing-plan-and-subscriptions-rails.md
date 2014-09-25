@@ -357,4 +357,4 @@ Create `ActAsPaypalPlan` concern in `models/concernes` folder and paste followin
 - You can suspend subscription for sometime and reactivate again.
 - But after cancellation, you can not reactivate, you have to subscribe again.
 
-<!-- <div class="message">Paypal su</div> -->
+[Gist url](https://gist.github.com/jbmyid/16c70067ea3f5cea7d2b)

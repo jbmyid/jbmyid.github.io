@@ -4,7 +4,7 @@
  <title>jbmyid</title>
  <link href="http://blog.jbmyid.in/atom.xml" rel="self"/>
  <link href="http://blog.jbmyid.in/"/>
- <updated>2014-09-25T14:25:13+05:30</updated>
+ <updated>2014-09-25T14:29:06+05:30</updated>
  <id>http://blog.jbmyid.in</id>
  <author>
    <name>Jalendra Bhanarkar</name>
@@ -392,7 +392,7 @@ Create &lt;code&gt;ActAsPaypalPlan&lt;/code&gt; concern in &lt;code&gt;models/co
   &lt;li&gt;But after cancellation, you can not reactivate, you have to subscribe again.&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;!-- &lt;div class=&quot;message&quot;&gt;Paypal su&lt;/div&gt; --&gt;
+&lt;p&gt;&lt;a href=&quot;https://gist.github.com/jbmyid/16c70067ea3f5cea7d2b&quot;&gt;Gist url&lt;/a&gt;&lt;/p&gt;
 </content>
  </entry>
  

@@ -4,13 +4,397 @@
  <title>jbmyid</title>
  <link href="http://blog.jbmyid.in/atom.xml" rel="self"/>
  <link href="http://blog.jbmyid.in/"/>
- <updated>2014-08-12T19:18:46+05:30</updated>
+ <updated>2014-09-25T14:25:13+05:30</updated>
  <id>http://blog.jbmyid.in</id>
  <author>
    <name>Jalendra Bhanarkar</name>
    <email></email>
  </author>
 
+ 
+ <entry>
+   <title>Paypal Subscription Plan</title>
+   <link href="http://blog.jbmyid.in/blog/paypal-billing-plan-and-subscriptions-rails"/>
+   <updated>2014-09-25T00:00:00+05:30</updated>
+   <id>http://blog.jbmyid.in/blog/paypal-billing-plan-and-subscriptions-rails</id>
+   <content type="html">&lt;h1 id=&quot;prerequisites&quot;&gt;Prerequisites&lt;/h1&gt;
+&lt;ul&gt;
+  &lt;li&gt;Create paypal account in developer section of &lt;a href=&quot;href=https://developer.paypal.com/&quot;&gt;paypal&lt;/a&gt;.&lt;/li&gt;
+  &lt;li&gt;Login and go to dashboard and then to my apps section.&lt;/li&gt;
+  &lt;li&gt;Create new app&lt;/li&gt;
+  &lt;li&gt;After app creation you will get api credentials for production and sandbox.&lt;/li&gt;
+  &lt;li&gt;Copy &lt;code&gt;client_id&lt;/code&gt; and &lt;code&gt;client_secret&lt;/code&gt; and keep in secret which will be needing in next step.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h1 id=&quot;setup-gem&quot;&gt;Setup Gem&lt;/h1&gt;
+
+&lt;p&gt;How to setup application to use paypal-sdk-rest gem.&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Add gem “paypal-sdk-rest” in gemfile
+    &lt;ul&gt;
+      &lt;li&gt;
+        &lt;pre&gt;gem &quot;paypal-sdk-rest&quot;&lt;/pre&gt;
+      &lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Run &lt;code&gt;bundle install&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;Run &lt;code&gt;rails g paypal:sdk:install&lt;/code&gt;.
+It will generate two files in config folder
+    &lt;ol&gt;
+      &lt;li&gt;config/paypal.yml&lt;/li&gt;
+      &lt;li&gt;config/initializers/paypal.rb&lt;/li&gt;
+    &lt;/ol&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Paste the credenetials which where obtained from application creation in paypal in &lt;code&gt;config/paypal.yml&lt;/code&gt;.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;The &lt;code&gt;paypal-sdk-rest&lt;/code&gt; gem currently does not include billing plan api which can be added manually.
+Create &lt;code&gt;paypal_ext.rb&lt;/code&gt; and copy following code and place in &lt;code&gt;config/initializers&lt;/code&gt; folder.&lt;/p&gt;
+
+&lt;pre&gt;
+&lt;code class=&quot;ruby&quot;&gt;
+  module PayPal::SDK
+    module REST
+      module DataTypes
+        Payer.class_eval do
+          object_of :merchant_id, String
+        end
+
+        class ChargeModel &amp;lt; Base
+          object_of :id, String
+          object_of :type, String
+          object_of :amount, Currency
+        end
+
+        class PaymentDefination &amp;lt; Base
+          object_of :name, String
+          object_of :type, String #UNLIMITED or FIXED
+          object_of :frequency_interval, String
+          object_of :frequency, String # DAY, WEEK, MONTH or YEAR.
+          object_of :cycles, Integer
+          object_of :amount, Currency
+          object_of :id, String
+          array_of :charge_models, ChargeModel
+        end
+
+        class MerchantPreference &amp;lt; Base
+          object_of :id, String
+          object_of :cancel_url, String
+          object_of :return_url, String
+          object_of :setup_fee, Currency
+          object_of :max_fail_attempts, Integer
+          object_of :auto_bill_amount, Currency
+          object_of :initial_fail_amount_action, Currency
+          object_of :create_time, DateTime
+          object_of :update_time, DateTime
+        end
+
+        class BillingPlan &amp;lt; Base
+          # {
+          # name: &quot;Plan Name&quot;, type: &quot;INFINITE&quot;, description: &quot;Any description&quot;,
+          # payment_definitions: {name: &quot;Name&quot;, type: &quot;REGULAR&quot;, frequency_interval: 1, amount: {value: 2.3, currency: &quot;USD&quot;}, frequency: &quot;MONTH&quot;},
+          # merchant_preferences: {cancel_url: &quot;http://google.com&quot;, return_url: &quot;http://google.com&quot;, setup_fee: {value: 0, currency: &quot;USD&quot;}}
+          # }
+          object_of :id, String
+          object_of :name, String
+          object_of :description, String
+          object_of :type, String
+          array_of :payment_definitions, DataTypes::PaymentDefination
+          object_of :merchant_preferences, MerchantPreference
+          object_of :state, String
+          array_of  :links, DataTypes::Links
+          object_of :payee, DataTypes::Payer
+          object_of :create_time, DateTime
+          object_of :update_time, DateTime
+
+
+          def self.load_members
+            object_of :name, String
+            object_of :description, String
+          end
+
+          include RequestDataType
+          def create
+            path = &quot;v1/payments/billing-plans&quot;
+            response = api.post(path, self.to_hash)
+            self.merge!(response)
+            success?
+          end
+
+          def self.find(resource_id)
+            raise ArgumentError.new(&quot;id required&quot;) if resource_id.to_s.strip.empty?
+            path = &quot;v1/payments/billing-plans/#{resource_id}&quot;
+            self.new(api.get(path))
+          end
+
+          def update(attrs)
+            path = &quot;v1/payments/billing-plans/#{self.id}&quot;
+            attrs = attrs.blank? ? [{path: &quot;/&quot;, value: {state: &quot;ACTIVE&quot;}, op: &quot;replace&quot;}] : attrs
+            response = api.patch(path, attrs)
+            self.merge!(response)
+            success?
+          end
+
+          def activate!
+            update([{path: &quot;/&quot;, value: {state: &quot;ACTIVE&quot;}, op: &quot;replace&quot;}])
+          end
+
+        end
+
+        class AgreementDetails &amp;lt; Base
+          object_of :outstanding_balance, Currency
+          object_of :cycles_remaining, Integer
+          object_of :cycles_completed, Integer
+          object_of :final_payment_date, DateTime
+          object_of :failed_payment_count, Integer
+        end
+
+        class AgreeMent &amp;lt; Base
+          object_of :id, String
+          object_of :name, String
+          object_of :description, String
+          object_of :start_date, DateTime
+          object_of :payer, Payer
+          object_of :plan, BillingPlan
+          array_of :links, DataTypes::Links
+          object_of :override_merchant_preferences, MerchantPreference
+          object_of :state, String
+          object_of :agreement_details, AgreementDetails
+
+          include RequestDataType
+
+          def create
+            path = &quot;v1/payments/billing-agreements&quot;
+            response = api.post(path, self.to_hash)
+            self.merge!(response)
+            success?
+          end
+
+          def approval_url
+            links.select{|link| link.rel==&quot;approval_url&quot;}[0].try :href
+          end
+
+          def execute_url
+            links.select{|link| link.rel==&quot;execute&quot;}[0].try :href
+          end
+
+          def execute!(token)
+            response = api.post(&quot;v1/payments/billing-agreements/#{token}/agreement-execute&quot;)
+            self.merge!(response)
+            success?
+          end
+
+          def suspend
+            path = &quot;v1/payments/billing-agreements/#{id}/suspend&quot;
+            response = api.post(path, {note: &quot;Suspending the subscription&quot;})
+            self.merge!(response)
+            success?
+          end
+
+          def reactivate
+            path = &quot;v1/payments/billing-agreements/#{id}/re-activate&quot;
+            response = api.post(path, {note: &quot;Reactivating the agreement.&quot;})
+            self.merge!(response)
+            success?
+          end
+
+          def cancel
+            path = &quot;v1/payments/billing-agreements/#{id}/cancel&quot;
+            response = api.post(path, {note: &quot;Cencelling the agreement.&quot;})
+            self.merge!(response)
+            success?
+          end
+
+          def self.find(resource_id)
+            raise ArgumentError.new(&quot;id required&quot;) if resource_id.to_s.strip.empty?
+            path = &quot;v1/payments/billing-agreements/#{resource_id}&quot;
+            self.new(api.get(path))
+          end
+
+        end
+
+
+      end
+    end
+  end
+&lt;/code&gt;
+&lt;/pre&gt;
+
+&lt;p&gt;Now you can create billing plans using rest api.&lt;/p&gt;
+
+&lt;h1 id=&quot;creating-billing-plans&quot;&gt;Creating Billing Plans&lt;/h1&gt;
+
+&lt;p&gt;Create &lt;code&gt;BillingPlan&lt;/code&gt; model and add fields required along with paypal_id.
+Create &lt;code&gt;ActAsPaypalPlan&lt;/code&gt; concern in &lt;code&gt;models/concernes&lt;/code&gt; folder and paste following code.&lt;/p&gt;
+&lt;pre&gt;
+  &lt;code&gt;
+    module ActAsPaypalPlan
+      extend ActiveSupport::Concern
+      include PayPal::SDK::REST::DataTypes
+
+      included do
+        after_validation :set_paypal_plan, on: :create
+      end
+
+      def paypal_plan
+        if paypal_id
+          @paypal_plan ||= BillingPlan.find(paypal_id)
+        else
+          @paypal_plan ||= BillingPlan.new(name: name, type: &quot;INFINITE&quot;, description: description,
+            payment_definitions: {name: &quot;PaymentDefinition#{name}&quot;, type: &quot;REGULAR&quot;, frequency_interval: 1, amount: {value: price, currency: &quot;USD&quot;}, frequency: interval},
+            merchant_preferences: {cancel_url: &quot;plan_cancel_url&quot;, return_url: &quot;return_url&quot;, setup_fee: {value: 0, currency: &quot;USD&quot;}})
+        end
+      end
+
+      def agreement(options={})
+        @agreement ||= AgreeMent.new(name: &quot;Subscribe #{name}&quot;, description: &quot;Subscribe #{name}&quot;, start_date: Date.today+1.days, plan: {id: paypal_plan.id}, payer: {payment_method: &quot;paypal&quot;}, override_merchant_preferences: {cancel_url: options[:cancel_url], return_url: options[:return_url]})
+      end
+
+      private
+      def set_paypal_plan
+        return if errors.any?
+        billing_plan = paypal_plan
+        if billing_plan.create &amp;amp;&amp;amp; billing_plan.activate!
+          self.paypal_id = billing_plan.id
+        else
+          self.errors[:paypal_id] &amp;lt;&amp;lt; billing_plan.error[:details].collect{|e| e[:issue]}.join(&quot;,&quot;)
+        end
+      end
+    end
+  &lt;/code&gt;
+&lt;/pre&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;include ActAsPaypalPlan in BillingPlan model&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h1 id=&quot;creating-subscription&quot;&gt;Creating Subscription&lt;/h1&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Create &lt;code&gt;Subscription&lt;/code&gt; model with required fields and &lt;code&gt;agreement_id&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;Create &lt;code&gt;act_as_subscription.rb&lt;/code&gt; concern in &lt;code&gt;models/concerns&lt;/code&gt; and paste below code.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;pre&gt;
+  &lt;code&gt;
+    module ActAsSubscription
+      STATES = {cancelled: &quot;CANCELLED&quot;, active: &quot;ACTIVE&quot;, suspended: &quot;SUSPENDED&quot;}
+      extend ActiveSupport::Concern
+      include PayPal::SDK::REST::DataTypes
+
+      included do
+        define_callbacks :cancel
+        define_callbacks :reactivate
+        define_callbacks :suspend
+        after_create :active!
+      end
+
+      STATES.each do |k,v|
+        define_method &quot;#{k}?&quot; do
+          self.state == v
+        end
+        define_method &quot;#{k}!&quot; do
+          update_column(:state, v)
+        end
+      end
+
+      def agreement
+        @agreement ||= AgreeMent.find(agreement_id)
+      end
+
+      def cancel
+        return unless agreement_id
+        run_callbacks :cancel do
+          update_column(:state, STATES[:cancelled]) if agreement.cancel
+        end
+      end
+
+      def suspend
+        return unless agreement_id
+        run_callbacks :suspend do
+          update_column(:state, STATES[:suspended]) if agreement.suspend
+        end
+      end
+
+      def reactivate
+        return unless agreement_id
+        run_callbacks :reactivate do
+          update_column(:state, STATES[:active]) if agreement.reactivate
+        end
+      end
+    end
+  &lt;/code&gt;
+&lt;/pre&gt;
+&lt;ul&gt;
+  &lt;li&gt;include ActAsSubscription in subscription model.&lt;/li&gt;
+  &lt;li&gt;Add following method in user model&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;pre&gt;
+  &lt;code&gt;
+    def create_subscription_with_payment_token!(options)
+      agreement = PayPal::SDK::REST::DataTypes::AgreeMent.new
+      if agreement.execute!(options[:token])
+        subscription = build_subscription(billing_plan_id: options[:billing_plan_id], agreement_id: agreement.id)
+        subscription.save
+      else
+        false
+      end
+    end
+  &lt;/code&gt;
+&lt;/pre&gt;
+
+&lt;h1 id=&quot;subscription-controller&quot;&gt;Subscription controller&lt;/h1&gt;
+&lt;ul&gt;
+  &lt;li&gt;For creating subscripton agreement which wont be successfull unles and untill you execute the agreement from paypal&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;pre&gt;
+  &lt;code&gt;
+    def approve
+      @plan = BillingPlan.find_by_id(params[:plan_id])
+      if @plan &amp;amp;&amp;amp; @plan.agreement(cancel_url: paypal_cancel_url, return_url: paypal_return_url).create
+        session[:plan_id] = @plan.id
+        redirect_to @plan.agreement.approval_url
+      else
+        flash[:alert] = t(&quot;flash.error.subscription_approve_failure&quot;)
+        redirect_to new_subscription_path
+      end
+    end
+  &lt;/code&gt;
+&lt;/pre&gt;
+&lt;ul&gt;
+  &lt;li&gt;It will redirect to paypal for authorization and approval.&lt;/li&gt;
+  &lt;li&gt;After approval paypal will redirect to your return url specified above.&lt;/li&gt;
+  &lt;li&gt;For execution of agreement&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;pre&gt;
+  &lt;code&gt;
+    def execute
+      if session[:plan_id]
+        @subscription = @user.create_subscription_with_payment_token!(token: params[:token], billing_plan_id: session[:plan_id])
+        session[:plan_id] = nil
+        flash[:notice] = t(&quot;flash.success.subscription.created&quot;)
+        redirect_to after_create_path
+      else
+        redirect_to unauthorized_url
+      end
+    end
+  &lt;/code&gt;
+&lt;/pre&gt;
+
+&lt;h1 id=&quot;after-creation-of-subscription&quot;&gt;After creation of subscription&lt;/h1&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;You can suspend subscription for sometime and reactivate again.&lt;/li&gt;
+  &lt;li&gt;But after cancellation, you can not reactivate, you have to subscribe again.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;!-- &lt;div class=&quot;message&quot;&gt;Paypal su&lt;/div&gt; --&gt;
+</content>
+ </entry>
  
  <entry>
    <title>Client Side Validation in Rails</title>

@@ -4,7 +4,7 @@
  <title>jbmyid</title>
  <link href="http://blog.jbmyid.in/atom.xml" rel="self"/>
  <link href="http://blog.jbmyid.in/"/>
- <updated>2014-09-25T14:29:06+05:30</updated>
+ <updated>2014-09-30T18:11:32+05:30</updated>
  <id>http://blog.jbmyid.in</id>
  <author>
    <name>Jalendra Bhanarkar</name>
@@ -19,7 +19,7 @@
    <id>http://blog.jbmyid.in/blog/paypal-billing-plan-and-subscriptions-rails</id>
    <content type="html">&lt;h1 id=&quot;prerequisites&quot;&gt;Prerequisites&lt;/h1&gt;
 &lt;ul&gt;
-  &lt;li&gt;Create paypal account in developer section of &lt;a href=&quot;href=https://developer.paypal.com/&quot;&gt;paypal&lt;/a&gt;.&lt;/li&gt;
+  &lt;li&gt;Create paypal account in developer section of &lt;a href=&quot;https://developer.paypal.com/&quot;&gt;paypal&lt;/a&gt;.&lt;/li&gt;
   &lt;li&gt;Login and go to dashboard and then to my apps section.&lt;/li&gt;
   &lt;li&gt;Create new app&lt;/li&gt;
   &lt;li&gt;After app creation you will get api credentials for production and sandbox.&lt;/li&gt;

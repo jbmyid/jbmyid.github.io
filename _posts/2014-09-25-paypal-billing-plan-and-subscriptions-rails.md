@@ -7,7 +7,7 @@ video: false
 comments: true
 ---
 #Prerequisites
-- Create paypal account in developer section of [paypal](href=https://developer.paypal.com/).
+- Create paypal account in developer section of [paypal](https://developer.paypal.com/).
 - Login and go to dashboard and then to my apps section.
 - Create new app
 - After app creation you will get api credentials for production and sandbox.

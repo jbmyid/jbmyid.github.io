@@ -42,3 +42,13 @@ It uses jquery [validation plugin](http://jqueryvalidation.org/), so you can add
 </pre>
 
 <div class="message">Note: styling error messages are upto you. You can set default error message placement with validation plugin.</div>
+
+<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- First Ad -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:728px;height:90px"
+     data-ad-client="ca-pub-8459710473289765"
+     data-ad-slot="8694625139"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>

@@ -12,6 +12,12 @@ layout: default
 		<h1>{{ page.title }}</h1>
 	</div>
 </header>
+
+<div id="middle">
+<div id="article">
+	{{ content }}
+</div>
+</div>
 <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
 <!-- First Ad -->
 <ins class="adsbygoogle"
@@ -21,11 +27,6 @@ layout: default
 <script>
 (adsbygoogle = window.adsbygoogle || []).push({});
 </script>
-<div id="middle">
-<div id="article">
-	{{ content }}
-</div>
-</div>
 <footer class="clean" style="background-image: url({{ site.cover }}); background-position: bottom; height: 60px;" data-stellar-background-ratio="0.5" data-stellar-horizontal-offset="50" data-stellar-vertical-offset="50">
 	<p class="copyright">&copy;{{ site.time | date: "%Y" }}, <a href="{{ site.copyright.url }}" target="_blank">{{ site.copyright.author }}</a>. <a href="{{ site.copyright.type_url }}" target="_blank">{{ site.copyright.type_title }}</a>.</p>
 </footer>
